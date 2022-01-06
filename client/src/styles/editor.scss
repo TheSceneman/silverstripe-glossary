@@ -1,0 +1,8 @@
+.mce-content-body [data-shortcode="glossary_term"] {
+    text-decoration: underline dotted grey;
+    text-underline-offset: 2px;
+
+    &:hover {
+         background-color: yellow;
+    }
+}

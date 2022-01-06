@@ -1,6 +1,6 @@
 {
     "name": "thesceneman/silverstripe-glossary",
-    "description": "Adds a Glossary section to CMS admin where glossary terms can be defined. These terms can then be added to content via WYSIWYG shortcode, and then rendered as interactive inline definitions on a webpage.",
+    "description": "Adds a Glossary section to CMS admin where glossary terms can be defined. These terms can then be added to content via the WYSIWYG and the definitions will be rendered as interactive rollovers within webpage content.",
     "type": "silverstripe-vendormodule",
     "authors": [
         {
@@ -14,12 +14,17 @@
     ],
     "keywords": [
         "silverstripe",
-        "CMS"
+        "CMS",
+        "Glossary",
+        "Dictionary",
+        "Terminology"
     ],
     "license": "BSD-3-Clause",
     "require": {
         "silverstripe/framework": "^4.0",
-        "silverstripe/admin": "^1.0"
+        "silverstripe/admin": "^1.0",
+        "symbiote/silverstripe-gridfieldextensions": "^3",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",
@@ -27,8 +32,8 @@
     },
     "autoload": {
         "psr-4": {
-            "SilverStripeModule\\Skeleton\\": "src/",
-            "SilverStripeModule\\Skeleton\\Tests\\": "tests/"
+            "TheSceneman\\SilverStripeGlossary\\": "src/",
+            "TheSceneman\\SilverStripeGlossary\\Tests\\": "tests/"
         }
     },
     "extra": {

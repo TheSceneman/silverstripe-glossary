@@ -1,0 +1,7 @@
+TheSceneman\SilverStripeGlossary\Model\GlossaryTerm:
+  term1:
+    Title: Term One
+    Definition: Some test text for glossary term one
+  term2:
+    Title: Term Two
+    Definition: Some test text for glossary term two

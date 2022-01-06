@@ -68,60 +68,11 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./client/src/boot/index.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _registerComponents = __webpack_require__("./client/src/boot/registerComponents.js");
-
-var _registerComponents2 = _interopRequireDefault(_registerComponents);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-window.document.addEventListener('DOMContentLoaded', function () {
-  (0, _registerComponents2.default)();
-});
-
-/***/ }),
-
-/***/ "./client/src/boot/registerComponents.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _Injector = __webpack_require__(0);
-
-var _Injector2 = _interopRequireDefault(_Injector);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-  _Injector2.default.component.registerMany({});
-};
-
-/***/ }),
-
 /***/ "./client/src/bundles/bundle.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
-__webpack_require__("./client/src/boot/index.js");
-
-/***/ }),
-
-/***/ 0:
-/***/ (function(module, exports) {
-
-module.exports = Injector;
 
 /***/ })
 
