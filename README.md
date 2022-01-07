@@ -24,7 +24,7 @@ Here we can add glossary terms via standard gridfield. I've added some sample da
 <img width="1463" alt="Glossary admin data" src="https://user-images.githubusercontent.com/88803020/148464674-7dedeb22-873a-479e-89c6-bf61d464444a.png">
 
 
-Now, we can add these terms to our WYSIWG markup. Select the word you'd like to apply the definition to, click the "Glosaary" button, and choose the appropriate definition: <br>
+Now, we can add these terms to our WYSIWG markup. Select the word you'd like to apply the definition to, click the "Glossary" button, and choose the appropriate definition: <br>
 <img width="563" alt="Adding glossary term to markup" src="https://user-images.githubusercontent.com/88803020/148465367-02e61452-cd18-41fb-b2f2-f5d97061249d.png"> <br>
 <img width="627" alt="Selecting glossary term" src="https://user-images.githubusercontent.com/88803020/148465492-74585acb-3250-41b7-b999-31c089befc32.png">
 
