@@ -12,7 +12,7 @@
   display: none;
 }
 
-.inline-glossary-term:hover + .inline-glossary-definition {
+.inline-glossary-term:hover .inline-glossary-definition {
   display: block;
   position: fixed;
   padding: 15px;
