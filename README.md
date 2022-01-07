@@ -10,7 +10,7 @@ the WYSIWYG and the definitions will be rendered as interactive rollovers within
 
 ## Installation
 ```
-composer require thesceneman/silverstripe-glossary
+composer require thesceneman/silverstripe-glossary dev-master
 ```
 ## Usage
 After running composer run the usual `vendor/bin/sake dev/build`
