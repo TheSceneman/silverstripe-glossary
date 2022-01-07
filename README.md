@@ -29,7 +29,7 @@ Now, we can add these terms to our WYSIWG markup. Select the word you'd like to 
 <img width="627" alt="Selecting glossary term" src="https://user-images.githubusercontent.com/88803020/148465492-74585acb-3250-41b7-b999-31c089befc32.png">
 
 
-And finally here is the marked up content on a webpage: <br>
+And finally here is the marked up content on a webpage (displayed at cursor hover state): <br>
 <img width="780" alt="Glossary frontend" src="https://user-images.githubusercontent.com/88803020/148470238-8fcd316f-75b7-437d-b761-4f7c67b1c21d.png">
 
 
