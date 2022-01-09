@@ -2,7 +2,7 @@
   text-decoration: underline solid grey;
   text-underline-offset: 2px;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: grey;
     cursor: pointer;
     color: white;
@@ -13,7 +13,7 @@
   display: none;
 }
 
-.inline-glossary-term:hover .inline-glossary-definition {
+.inline-glossary-term:hover .inline-glossary-definition, .inline-glossary-term:focus .inline-glossary-definition {
   color: black;
   display: inline;
   position: absolute;
