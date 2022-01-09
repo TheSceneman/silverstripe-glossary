@@ -5,6 +5,7 @@
   &:hover {
     background-color: grey;
     cursor: pointer;
+    color: white;
   }
 }
 
@@ -13,10 +14,12 @@
 }
 
 .inline-glossary-term:hover .inline-glossary-definition {
-  display: block;
-  position: fixed;
+  color: black;
+  display: inline;
+  position: absolute;
   padding: 15px;
-  margin-top: 5px;
+  margin-top: 25px;
+  margin-left: -50px;
   max-width: 250px;
   background-color: white;
   -webkit-box-shadow: 0px 2px 7px 0px rgba(179,179,179,0.5);
