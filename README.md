@@ -12,7 +12,7 @@ Thanks to @MelissaWu-SS for writing the code that was the basis for this module
 
 ## Installation
 ```
-composer require thesceneman/silverstripe-glossary dev-master
+composer require thesceneman/silverstripe-glossary
 ```
 ## Usage
 After running composer run the usual `vendor/bin/sake dev/build`
