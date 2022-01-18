@@ -3,6 +3,8 @@
 Adds a Glossary section to CMS admin where glossary terms can be defined. These terms can then be added to content via
 the WYSIWYG and the definitions will be rendered as interactive rollovers within webpage content.
 
+Thanks to @MelissaWu-SS for writing the code that was the basis for this module
+
 ## Requirements
 
 * SilverStripe ^4.0
