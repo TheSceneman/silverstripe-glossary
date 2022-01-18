@@ -3,7 +3,7 @@ Name: app_glossary
 ---
 SilverStripe\Control\Director:
   rules:
-    'api//$Action': TheSceneman\SilverStripeGlossary\Controllers\GlossaryController
+    'glossary-api//$Action': TheSceneman\SilverStripeGlossary\Controllers\GlossaryController
 
 SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
   editor_css:

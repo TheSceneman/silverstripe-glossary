@@ -223,7 +223,7 @@ const sanitiseShortCodeProperties = (rawProperties) => {
     editor.addCommand("ssglossary", () => {
       editor.setProgressState(1);
       // Fetch the glossary data. If it succeeds, open the Glossary modal, otherwise, show error alert
-      fetch("./api/glossary")
+      fetch("./glossary-api/glossary")
         .then(
           (response) => {
             if (response.status !== 200) {
