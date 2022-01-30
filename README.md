@@ -41,6 +41,7 @@ This module comes with a very basic frontend implementation out of the box and y
 Alternatively you can overload the template at `TheSceneman\SilverStripeGlossary\View\GlossaryShortcodeProvider.ss` and use whatever markup and or Javascript components you'd like.
 
 ## Maintainers
+ * Melissa Wu <melissa.wu@silverstripe.com>
  * Adrian Jimson <adrian.jimson@silverstripe.com>
 
 ## Development and contribution
