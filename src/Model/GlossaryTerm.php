@@ -3,6 +3,7 @@
 namespace TheSceneman\SilverStripeGlossary\Model;
 
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
@@ -17,7 +18,7 @@ class GlossaryTerm extends DataObject
 
     private static array $db = [
         'Title' => 'Varchar',
-        'Definition' => 'Varchar',
+        'Definition' => 'HTMLText',
     ];
 
     private static array $extensions = [
@@ -37,7 +38,7 @@ class GlossaryTerm extends DataObject
 
         $fields->removeByName('Definition');
 
-        $fields->addFieldsToTab('Root.Main', [TextareaField::create('Definition')]);
+        $fields->addFieldsToTab('Root.Main', [HTMLEditorField::create('Definition')]);
 
         return $fields;
     }
