@@ -2,6 +2,7 @@
 
 namespace TheSceneman\SilverStripeGlossary\View;
 
+use SilverStripe\View\Parsers\ShortcodeParser;
 use TheSceneman\SilverStripeGlossary\Model\GlossaryTerm;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
@@ -43,6 +44,9 @@ class GlossaryShortcodeProvider implements ShortcodeHandler
         if (!$termDefinition) {
             return '';
         }
+
+        // Ensure any shortcodes, such as internal links, are parsed
+        $termDefinition = ShortcodeParser::get_active()->parse($termDefinition);
 
         $data = [
             'Content' => DBField::create_field('HTMLFragment', $content),
