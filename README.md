@@ -36,6 +36,9 @@ And finally here is the marked up content on a webpage (displayed at cursor hove
 
 
 ## Customising the frontend
+
+NB. With the release of v0.2.0 the Definition field on GlossaryTerms was changed from Varchar to HTMLText. The simple CSS only frontend implementation renders this as plaintext (in order to be rendered within span tags) so no markup will be carried to the frontend. 
+
 This module comes with a very basic frontend implementation out of the box and you'll likely want to change this to match your application. You may opt to keep the purely CSS rollover functionality and write some new CSS for the classes `.inline-glossary-term` and `.inline-glossary-definition`.
 
 Alternatively you can overload the template at `TheSceneman\SilverStripeGlossary\View\GlossaryShortcodeProvider.ss` and use whatever markup and or Javascript components you'd like.
