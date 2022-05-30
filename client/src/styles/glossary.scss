@@ -6,24 +6,23 @@
     background-color: grey;
     cursor: pointer;
     color: white;
+
+    .inline-glossary-definition {
+      color: black;
+      display: inline;
+      padding: 15px;
+      margin-top: 25px;
+      margin-left: -50px;
+      max-width: 250px;
+      background-color: white;
+      -webkit-box-shadow: 0px 2px 7px 0px rgba(179,179,179,0.5);
+      -moz-box-shadow: 0px 2px 7px 0px rgba(179,179,179,0.5);
+      box-shadow: 0px 2px 7px 0px rgba(179,179,179,0.5);
+    }
   }
 }
 
 .inline-glossary-definition {
   display: none;
-}
-
-.inline-glossary-term:hover .inline-glossary-definition, .inline-glossary-term:focus .inline-glossary-definition {
-  color: black;
-  display: inline;
   position: absolute;
-  padding: 15px;
-  margin-top: 25px;
-  margin-left: -50px;
-  max-width: 250px;
-  background-color: white;
-  -webkit-box-shadow: 0px 2px 7px 0px rgba(179,179,179,0.5);
-  -moz-box-shadow: 0px 2px 7px 0px rgba(179,179,179,0.5);
-  box-shadow: 0px 2px 7px 0px rgba(179,179,179,0.5);
 }
-
