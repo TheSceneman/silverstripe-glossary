@@ -2,8 +2,10 @@
 
 namespace TheSceneman\SilverStripeGlossary\View;
 
+use SilverStripe\View\Parsers\ShortcodeParser;
 use TheSceneman\SilverStripeGlossary\Model\GlossaryTerm;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Parsers\ShortcodeHandler;
 
@@ -31,15 +33,24 @@ class GlossaryShortcodeProvider implements ShortcodeHandler
         }
 
         $termID = $arguments['id'];
-        $termDefinition = GlossaryTerm::get()->byID($termID)->Definition;
+        $glossaryTerm = GlossaryTerm::get()->byID($termID);
 
+        // There's nothing to stop this term from being deleted, so first check that it still exists
+        if (!$glossaryTerm) {
+            return '';
+        }
+
+        $termDefinition = $glossaryTerm->Definition;
         if (!$termDefinition) {
             return '';
         }
 
+        // Ensure any shortcodes, such as internal links, are parsed
+        $termDefinition = ShortcodeParser::get_active()->parse($termDefinition);
+
         $data = [
             'Content' => DBField::create_field('HTMLFragment', $content),
-            'Terminology' => $termDefinition,
+            'Terminology' => DBHTMLText::create()->setValue($termDefinition),
         ];
 
         return ArrayData::create($data)->renderWith(self::class)->forTemplate();
