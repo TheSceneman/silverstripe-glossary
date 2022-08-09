@@ -34,13 +34,15 @@ class GlossaryTerm extends DataObject
 
     public function getCMSFields(): FieldList
     {
+        $self = $this;
+
+        $this->beforeUpdateCMSFields(static function ($fields) use ($self): void {
+            $fields->removeByName('Definition');
+
+            $fields->addFieldsToTab('Root.Main', [HTMLEditorField::create('Definition')]);
+        });
+
         $fields = parent::getCMSFields();
-
-        $fields->removeByName('Definition');
-
-        $fields->addFieldsToTab('Root.Main', [HTMLEditorField::create('Definition')]);
-        
-        $this->extend('extendGlossaryCMSFields', $fields);
 
         return $fields;
     }
