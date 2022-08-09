@@ -39,6 +39,8 @@ class GlossaryTerm extends DataObject
         $fields->removeByName('Definition');
 
         $fields->addFieldsToTab('Root.Main', [HTMLEditorField::create('Definition')]);
+        
+        $this->extend('extendGlossaryCMSFields', $fields);
 
         return $fields;
     }
