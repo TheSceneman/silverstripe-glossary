@@ -178,25 +178,36 @@ const sanitiseShortCodeProperties = (rawProperties) => {
   const glossaryModal = (editor, data) => {
     editor.windowManager.open({
       title: "Glossary",
-      width: 330,
-      height: 70,
+      size: 'normal',
       // Add a listbox(dropdown list) to the modal, it enables us to select a terminology
-      body:
-        [
+      body: {
+        type: 'panel',
+        items: [
           {
             type: "listbox",
             name: "glossary",
             label: "Glossary",
-            values: data,
+            items: data,
           },
-        ],
+        ]
+      },
+      buttons: [
+        {
+          type: 'submit',
+          text: 'OK'
+        },
+        {
+          type: 'cancel',
+          text: 'Cancel'
+        }
+      ],
       // Submit event handler. It will be triggered when the 'OK' button is clicked.
       // It gets the selected terminology id and insert it to the selected text in the format of the example code:
       // <span data-shortcode="glossary_term" data-id="1">public cloud</span>
-      onSubmit(v) {
-        const termID = v.data.glossary;
+      onSubmit(dialogApi) {
+        const termID = dialogApi.getData().glossary;
         // The selected text to be inserted a terminology
-        const selectedText = editor.selection.getContent();
+        const selectedText = editor.selection.getNode().innerText;
         // No text was selected
         if (!selectedText) {
           return;
@@ -213,10 +224,12 @@ const sanitiseShortCodeProperties = (rawProperties) => {
    */
   const ssglossary = (editor) => {
     // Add the plugin button to WYSIWYG field
-    editor.addButton("ssglossary", {
+    editor.ui.registry.addButton("ssglossary", {
       tooltip: "Insert terminology",
       text: "Glossary",
-      cmd: "ssglossary",
+      onAction: function () {
+        editor.execCommand("ssglossary");
+      },
     });
 
     // Define the 'ssglossary' command, which will be triggered when the Glossary plugin button is clicked
