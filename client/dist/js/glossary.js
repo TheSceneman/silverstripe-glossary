@@ -207,13 +207,14 @@ const sanitiseShortCodeProperties = (rawProperties) => {
       onSubmit(dialogApi) {
         const termID = dialogApi.getData().glossary;
         // The selected text to be inserted a terminology
-        const selectedText = editor.selection.getNode().innerText;
+        const selectedText = editor.selection.getContent();
         // No text was selected
         if (!selectedText) {
-          return;
+          editor.windowManager.close();
         }
         const newText = `<span data-shortcode="glossary_term" data-id="${termID}">${selectedText}</span>`;
         editor.insertContent(newText);
+        editor.windowManager.close();
       },
     });
   };
@@ -227,7 +228,7 @@ const sanitiseShortCodeProperties = (rawProperties) => {
     editor.ui.registry.addButton("ssglossary", {
       tooltip: "Insert terminology",
       text: "Glossary",
-      onAction: function () {
+      onAction() {
         editor.execCommand("ssglossary");
       },
     });
@@ -254,14 +255,14 @@ const sanitiseShortCodeProperties = (rawProperties) => {
     });
 
     /**
-     * SaveContent event handler. It fires after contents have been saved from the editor
+     * PostProcess event handler. It fires after contents have been saved from the editor
      * We want to save the content with inserted glossary term to db in the format of Shortcodes for further process
      * so we transform the
      * '<span data-shortcode="glossary_term" data-id="1">public cloud</span>' to
      * '[glossary_term id="1"]public cloud[/glossary_term]'
      * See more about Shortcodes here: https://docs.silverstripe.org/en/4/developer_guides/extending/shortcodes/
      */
-    editor.on("SaveContent", (o) => {
+    editor.on("PostProcess", (o) => {
       const parser = new DOMParser();
       const content = parser.parseFromString(o.content, "text/html");
       const filter = `span[data-shortcode="glossary_term"]`;

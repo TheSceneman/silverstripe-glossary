@@ -3,6 +3,7 @@
 namespace TheSceneman\SilverStripeGlossary\Model;
 
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\ORM\DataObject;
@@ -39,7 +40,12 @@ class GlossaryTerm extends DataObject
         $this->beforeUpdateCMSFields(static function ($fields) use ($self): void {
             $fields->removeByName('Definition');
 
-            $fields->addFieldsToTab('Root.Main', [HTMLEditorField::create('Definition')]);
+            $fields->addFieldsToTab(
+                'Root.Main',
+                [
+                    HTMLEditorField::create('Definition')->setEditorConfig(HTMLEditorConfig::get('restricted'))
+                ]
+            );
         });
 
         $fields = parent::getCMSFields();
