@@ -44,7 +44,7 @@ class GlossaryTerm extends DataObject
             $fields->addFieldsToTab(
                 'Root.Main',
                 [
-                    HTMLEditorField::create('Definition')->setEditorConfig(HTMLEditorConfig::get('restricted'))
+                    HTMLEditorField::create('Definition')->setEditorConfig(HTMLEditorConfig::get('glossary'))
                 ]
             );
         });
