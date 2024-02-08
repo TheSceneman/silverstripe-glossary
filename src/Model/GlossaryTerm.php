@@ -13,6 +13,7 @@ use SilverStripe\Versioned\Versioned;
 /**
  * @property string Title
  * @property string Definition
+ * @mixin Versioned
  */
 class GlossaryTerm extends DataObject
 {
@@ -60,6 +61,7 @@ class GlossaryTerm extends DataObject
 
         $requiredFields = [
             'Title',
+            'Definition',
         ];
 
         $composite->addValidator(RequiredFields::create($requiredFields));
