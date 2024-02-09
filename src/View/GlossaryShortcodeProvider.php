@@ -36,13 +36,16 @@ class GlossaryShortcodeProvider implements ShortcodeHandler
         $glossaryTerm = GlossaryTerm::get()->byID($termID);
 
         // There's nothing to stop this term from being deleted, so first check that it still exists
+        // If it doesn't exist, just return the selected content
         if (!$glossaryTerm) {
-            return '';
+            return $content;
         }
 
         $termDefinition = $glossaryTerm->Definition;
+
+        // If there is no definition, just return the selected content
         if (!$termDefinition) {
-            return '';
+            return $content;
         }
 
         // Ensure any shortcodes, such as internal links, are parsed
