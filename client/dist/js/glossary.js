@@ -203,7 +203,7 @@ const sanitiseShortCodeProperties = (rawProperties) => {
       ],
       // Submit event handler. It will be triggered when the 'OK' button is clicked.
       // It gets the selected terminology id and insert it to the selected text in the format of the example code:
-      // <span data-shortcode="glossary_term" data-id="1">public cloud</span>
+      // <strong data-shortcode="glossary_term" data-id="1">public cloud</strong>
       onSubmit(dialogApi) {
         const termID = dialogApi.getData().glossary;
         // The selected text to be inserted a terminology
@@ -212,7 +212,7 @@ const sanitiseShortCodeProperties = (rawProperties) => {
         if (!selectedText) {
           editor.windowManager.close();
         }
-        const newText = `<span data-shortcode="glossary_term" data-id="${termID}">${selectedText}</span>`;
+        const newText = `<strong data-shortcode="glossary_term" data-id="${termID}">${selectedText}</strong>`;
         editor.insertContent(newText);
         editor.windowManager.close();
       },
@@ -258,14 +258,14 @@ const sanitiseShortCodeProperties = (rawProperties) => {
      * PostProcess event handler. It fires after contents have been saved from the editor
      * We want to save the content with inserted glossary term to db in the format of Shortcodes for further process
      * so we transform the
-     * '<span data-shortcode="glossary_term" data-id="1">public cloud</span>' to
+     * '<strong data-shortcode="glossary_term" data-id="1">public cloud</strong>' to
      * '[glossary_term id="1"]public cloud[/glossary_term]'
      * See more about Shortcodes here: https://docs.silverstripe.org/en/4/developer_guides/extending/shortcodes/
      */
     editor.on("PostProcess", (o) => {
       const parser = new DOMParser();
       const content = parser.parseFromString(o.content, "text/html");
-      const filter = `span[data-shortcode="glossary_term"]`;
+      const filter = `strong[data-shortcode="glossary_term"]`;
       const elementList = content.querySelectorAll(filter);
 
       if (elementList.length === 0) {
@@ -304,11 +304,11 @@ const sanitiseShortCodeProperties = (rawProperties) => {
       let {content} = o;
       // Match [glossary_term] shortcodes
       let match = shortCodeParser.match('glossary_term', true, content);
-      // Transform the shortcodes to html '<span>...</span>'
+      // Transform the shortcodes to html '<strong>...</strong>'
       while (match) {
         const { original, properties } = match;
         // Transform the shortcode to raw html
-        const raw = `<span data-shortcode="glossary_term" data-id="${properties.id}">${match.content}</span>`;
+        const raw = `<strong data-shortcode="glossary_term" data-id="${properties.id}">${match.content}</strong>`;
         content = content.replace(original, raw);
         match = shortCodeParser.match('glossary_term', true, content);
       }
