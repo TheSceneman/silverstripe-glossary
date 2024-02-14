@@ -176,6 +176,9 @@ const sanitiseShortCodeProperties = (rawProperties) => {
    * @param data The glossary data
    */
   const glossaryModal = (editor, data) => {
+    const [firstItem, ...rest] = data;
+    const currentNode = editor?.selection.getNode();
+    const currentValue = currentNode?.dataset.id ?? firstItem.value;
     editor.windowManager.open({
       title: "Glossary",
       size: 'normal',
@@ -189,7 +192,10 @@ const sanitiseShortCodeProperties = (rawProperties) => {
             label: "Glossary",
             items: data,
           },
-        ]
+        ],
+      },
+      initialData: {
+        glossary: currentValue,
       },
       buttons: [
         {
@@ -210,6 +216,11 @@ const sanitiseShortCodeProperties = (rawProperties) => {
         const selectedText = editor.selection.getContent();
         // No text was selected
         if (!selectedText) {
+          // update value if we're on an allready valid node
+          const currentNode = editor.selection.getNode();
+          if (currentNode && currentNode?.dataset?.shortcode === 'glossary_term') {
+            currentNode.dataset.id = termID;
+          }
           editor.windowManager.close();
         }
         const newText = `<strong data-shortcode="glossary_term" data-id="${termID}">${selectedText}</strong>`;
