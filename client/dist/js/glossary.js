@@ -176,33 +176,56 @@ const sanitiseShortCodeProperties = (rawProperties) => {
    * @param data The glossary data
    */
   const glossaryModal = (editor, data) => {
+    const [firstItem, ...rest] = data;
+    const currentNode = editor?.selection.getNode();
+    const currentValue = currentNode?.dataset.id ?? firstItem.value;
     editor.windowManager.open({
       title: "Glossary",
-      width: 330,
-      height: 70,
+      size: 'normal',
       // Add a listbox(dropdown list) to the modal, it enables us to select a terminology
-      body:
-        [
+      body: {
+        type: 'panel',
+        items: [
           {
             type: "listbox",
             name: "glossary",
             label: "Glossary",
-            values: data,
+            items: data,
           },
         ],
+      },
+      initialData: {
+        glossary: currentValue,
+      },
+      buttons: [
+        {
+          type: 'submit',
+          text: 'OK'
+        },
+        {
+          type: 'cancel',
+          text: 'Cancel'
+        }
+      ],
       // Submit event handler. It will be triggered when the 'OK' button is clicked.
       // It gets the selected terminology id and insert it to the selected text in the format of the example code:
-      // <span data-shortcode="glossary_term" data-id="1">public cloud</span>
-      onSubmit(v) {
-        const termID = v.data.glossary;
+      // <strong data-shortcode="glossary_term" data-id="1">public cloud</strong>
+      onSubmit(dialogApi) {
+        const termID = dialogApi.getData().glossary;
         // The selected text to be inserted a terminology
         const selectedText = editor.selection.getContent();
         // No text was selected
         if (!selectedText) {
-          return;
+          // update value if we're on an allready valid node
+          const currentNode = editor.selection.getNode();
+          if (currentNode && currentNode?.dataset?.shortcode === 'glossary_term') {
+            currentNode.dataset.id = termID;
+          }
+          editor.windowManager.close();
         }
-        const newText = `<span data-shortcode="glossary_term" data-id="${termID}">${selectedText}</span>`;
+        const newText = `<strong data-shortcode="glossary_term" data-id="${termID}">${selectedText}</strong>`;
         editor.insertContent(newText);
+        editor.windowManager.close();
       },
     });
   };
@@ -213,10 +236,12 @@ const sanitiseShortCodeProperties = (rawProperties) => {
    */
   const ssglossary = (editor) => {
     // Add the plugin button to WYSIWYG field
-    editor.addButton("ssglossary", {
+    editor.ui.registry.addButton("ssglossary", {
       tooltip: "Insert terminology",
       text: "Glossary",
-      cmd: "ssglossary",
+      onAction() {
+        editor.execCommand("ssglossary");
+      },
     });
 
     // Define the 'ssglossary' command, which will be triggered when the Glossary plugin button is clicked
@@ -241,17 +266,17 @@ const sanitiseShortCodeProperties = (rawProperties) => {
     });
 
     /**
-     * SaveContent event handler. It fires after contents have been saved from the editor
+     * PostProcess event handler. It fires after contents have been saved from the editor
      * We want to save the content with inserted glossary term to db in the format of Shortcodes for further process
      * so we transform the
-     * '<span data-shortcode="glossary_term" data-id="1">public cloud</span>' to
+     * '<strong data-shortcode="glossary_term" data-id="1">public cloud</strong>' to
      * '[glossary_term id="1"]public cloud[/glossary_term]'
      * See more about Shortcodes here: https://docs.silverstripe.org/en/4/developer_guides/extending/shortcodes/
      */
-    editor.on("SaveContent", (o) => {
+    editor.on("PostProcess", (o) => {
       const parser = new DOMParser();
       const content = parser.parseFromString(o.content, "text/html");
-      const filter = `span[data-shortcode="glossary_term"]`;
+      const filter = `strong[data-shortcode="glossary_term"]`;
       const elementList = content.querySelectorAll(filter);
 
       if (elementList.length === 0) {
@@ -290,11 +315,11 @@ const sanitiseShortCodeProperties = (rawProperties) => {
       let {content} = o;
       // Match [glossary_term] shortcodes
       let match = shortCodeParser.match('glossary_term', true, content);
-      // Transform the shortcodes to html '<span>...</span>'
+      // Transform the shortcodes to html '<strong>...</strong>'
       while (match) {
         const { original, properties } = match;
         // Transform the shortcode to raw html
-        const raw = `<span data-shortcode="glossary_term" data-id="${properties.id}">${match.content}</span>`;
+        const raw = `<strong data-shortcode="glossary_term" data-id="${properties.id}">${match.content}</strong>`;
         content = content.replace(original, raw);
         match = shortCodeParser.match('glossary_term', true, content);
       }

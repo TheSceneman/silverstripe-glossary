@@ -21,7 +21,8 @@ class GlossaryController extends Controller
         foreach (GlossaryTerm::get() as $glossaryTerm) {
             $result[] = [
                 'text' => $glossaryTerm->Title,
-                'value' => $glossaryTerm->ID,
+                // TinyMce requires the value should be string
+                'value' => (string)$glossaryTerm->ID,
             ];
         }
 

@@ -9,6 +9,10 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 ShortcodeParser::get('default')
     ->register('glossary_term', [GlossaryShortcodeProvider::class, 'handle_shortcode']);
 
+// We should remove the "Glossary" button from the WYSIWYG field for Glossary Term Definition
+$restrictedConfig = clone HTMLEditorConfig::get('cms');
+HTMLEditorConfig::set_config('glossary', $restrictedConfig);
+
 // Add glossary button to WYSIWYG
 $editorConfig = HTMLEditorConfig::get('cms');
 $editorConfig->enablePlugins([

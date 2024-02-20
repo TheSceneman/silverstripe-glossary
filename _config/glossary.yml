@@ -1,5 +1,5 @@
 ---
-Name: app_glossary
+Name: glossary
 ---
 SilverStripe\Control\Director:
   rules:
