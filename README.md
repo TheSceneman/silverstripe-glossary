@@ -7,7 +7,11 @@ Thanks to @MelissaWu-SS for writing the code that was the basis for this module
 
 ## Requirements
 
-* SilverStripe ^4.0
+version ^1
+* Silverstripe ^5
+
+version ^0.2
+* Silverstripe ^4.0
 * PHP ^7.3
 
 ## Installation
