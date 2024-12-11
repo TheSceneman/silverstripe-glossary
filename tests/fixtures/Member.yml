@@ -1,0 +1,25 @@
+SilverStripe\Security\Permission:
+  admin:
+    Code: 'ADMIN'
+  cms-access:
+    Code: 'CMS_ACCESS'
+
+SilverStripe\Security\Group:
+  admin:
+    Title: 'Admin'
+    Code: 'admin'
+    Permissions: =>SilverStripe\Security\Permission.admin
+  cms-author:
+    Title: 'CMS authors'
+    Code: 'cms-author'
+    Permissions: =>SilverStripe\Security\Permission.cms-access
+
+SilverStripe\Security\Member:
+  admin:
+    FirstName: 'Admin'
+    Email: 'admin@silverstripe.com'
+    Groups: =>SilverStripe\Security\Group.admin
+  content-author:
+    FirstName: 'Content author'
+    Email: 'content-author@silverstripe.com'
+    Groups: =>SilverStripe\Security\Group.cms-author

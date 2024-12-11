@@ -5,6 +5,7 @@ namespace TheSceneman\SilverStripeGlossary\Controllers;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Security\Security;
 use TheSceneman\SilverStripeGlossary\Model\GlossaryTerm;
 
 class GlossaryController extends Controller
@@ -15,6 +16,12 @@ class GlossaryController extends Controller
 
     public function glossary(HTTPRequest $request): HTTPResponse
     {
+        $member = Security::getCurrentUser();
+
+        if ($member === null) {
+            return $this->httpError(403, 'Forbidden');
+        }
+
         $result = [];
 
         /** @var GlossaryTerm $glossaryTerm */
