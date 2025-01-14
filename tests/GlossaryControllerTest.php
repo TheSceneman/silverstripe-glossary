@@ -18,7 +18,7 @@ class GlossaryControllerTest extends FunctionalTest
      */
     public function testGlossaryNotLoggedIn(): void
     {
-        $page = $this->get('api/glossary/');
+        $page = $this->get('glossary-api/glossary/');
 
         $this->assertEquals(403, $page->getStatusCode());
     }
@@ -31,9 +31,8 @@ class GlossaryControllerTest extends FunctionalTest
         $loggedInUser = $this->objFromFixture(Member::class, 'content-author');
         $this->logInAs($loggedInUser);
 
-        $page = $this->get('api/glossary/');
+        $page = $this->get('glossary-api/glossary/');
         $this->assertEquals(200, $page->getStatusCode());
-
     }
 
 }
