@@ -6,7 +6,7 @@ use SilverStripe\View\Parsers\ShortcodeParser;
 use TheSceneman\SilverStripeGlossary\Model\GlossaryTerm;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Parsers\ShortcodeHandler;
 
 class GlossaryShortcodeProvider implements ShortcodeHandler

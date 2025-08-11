@@ -2,11 +2,11 @@
 
 namespace TheSceneman\SilverStripeGlossary\Model;
 
-use SilverStripe\Forms\CompositeValidator;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\CompositeValidator;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
@@ -64,7 +64,7 @@ class GlossaryTerm extends DataObject
             'Definition',
         ];
 
-        $composite->addValidator(RequiredFields::create($requiredFields));
+        $composite->addValidator(RequiredFieldsValidator::create($requiredFields));
 
         return $composite;
     }
